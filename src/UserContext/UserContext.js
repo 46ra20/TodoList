@@ -1,12 +1,16 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { app } from '../Firebase/firebase.config';
-import {getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth';
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 const auth = getAuth(app)
 const UserContext = ({children}) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [getTask, setGetTask] = useState([])    
+    const [finishedTask, setFinishedTask] = useState([]);
+    const [refetch, setRefetch] = useState(false)
+
     const googleProvider = new GoogleAuthProvider();
 
     const loginWithGoogle = () =>{
@@ -17,6 +21,10 @@ const UserContext = ({children}) => {
     const loginWithEmail = (email, password) =>{
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    const singUp = (email, password) =>{
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const logOut = () => {
@@ -37,7 +45,15 @@ const UserContext = ({children}) => {
             loginWithGoogle,
             loginWithEmail,
             logOut,
-            loading
+            singUp,
+            user,
+            loading,
+            getTask,
+            setGetTask,
+            refetch,
+            setRefetch,
+            finishedTask,
+            setFinishedTask
 
         }}>
         {
