@@ -10,6 +10,7 @@ const UserContext = ({children}) => {
     const [getTask, setGetTask] = useState([])    
     const [finishedTask, setFinishedTask] = useState([]);
     const [refetch, setRefetch] = useState(false)
+    const [theme, setTheme] = useState(true)
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -35,6 +36,7 @@ const UserContext = ({children}) => {
         const unsubscribe = () => {
             onAuthStateChanged(auth, currentUSer=>{
                 setUser(currentUSer)
+                setLoading(false);
             })
         }
         return unsubscribe();
@@ -53,7 +55,9 @@ const UserContext = ({children}) => {
             refetch,
             setRefetch,
             finishedTask,
-            setFinishedTask
+            setFinishedTask,
+            theme,
+            setTheme
 
         }}>
         {

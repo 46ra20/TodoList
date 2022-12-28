@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../UserContext/UserContext";
 import { Link } from "react-router-dom";
+import {CiLight, CiDark} from "react-icons/ci";
+import { Tooltip } from 'react-tooltip'
 
 const MenuBar = () => {
-  const { user,logOut } = useContext(AuthContext);
+  const { user,logOut,theme, setTheme } = useContext(AuthContext);
   const handleLogOut = () =>{
     logOut()
     .then()
@@ -11,6 +13,11 @@ const MenuBar = () => {
   }
   const menu = (
     <>
+      {
+        theme?
+        <li onClick={()=>setTheme(!theme)} data-tooltip-content="Make Dark" data-tooltip-place="top" title="Dark"><p className="text-2xl"><CiDark/></p></li>:
+        <li onClick={()=>setTheme(!theme)} data-tooltip-content="Make Light" data-tooltip-place="top" title="Light"><p className="text-2xl"><CiLight/></p></li>
+      }
       <li>
         <Link to={"/"}>Add Task</Link>
       </li>
@@ -70,6 +77,7 @@ const MenuBar = () => {
           <ul className="menu menu-horizontal px-1">{menu}</ul>
         </div>
       </div>
+      <Tooltip anchorId="my-anchor-element" />
     </div>
   );
 };

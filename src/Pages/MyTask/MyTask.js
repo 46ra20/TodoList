@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 
 const MyTask = () => {
   const { user, getTask, setGetTask, setRefetch, refetch } = useContext(AuthContext);
+  const [modal, setModal] = useState('')
 
   useEffect(() => {
     fetch(`${url}/get-task?email=${user.email}`)
@@ -53,7 +54,7 @@ const MyTask = () => {
             <div className="flex">
                 <p className="mr-3 hover:shadow-xl">
                   {/* <button className="btn btn-sm"><AiFillEdit className="text-xl "/></button> */}
-                  <label htmlFor="my-modal-3" className="btn btn-sm"><AiFillEdit className="text-xl "/></label>
+                  <label htmlFor="todo-list" className="btn btn-sm" onClick={()=>setModal(task)}><AiFillEdit className="text-xl "/></label>
                 </p>
                 <p className="hover:shadow-xl">
                   <button className="btn btn-sm">
@@ -64,7 +65,9 @@ const MyTask = () => {
           </div>
         ))}
       </div>
-      <Modal/>
+      {
+        modal && <Modal modal={modal} setModal={setModal}/>
+      }
     </div>
   );
 };

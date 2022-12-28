@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../UserContext/UserContext";
 import { addTask } from "../../Utilities/Utilities";
 
 const AddTask = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
+  const [loading, setLoading] = useState(false)
   const handleSubmit = (event) => {
+    setLoading(true)
     event.preventDefault();
     const form = event.target;
     const task = form.task.value;
@@ -27,11 +29,15 @@ const AddTask = () => {
         const imgUrl = data?.data?.display_url;
         addTask({ email, task, isComplete, imgUrl });
         form.reset()
+        setLoading(false)
       });
   };
 
   return (
     <div className="flex justify-center items-center">
+      {
+        loading && <p className="absolute top-20 left-50 text-2xl font-semibold animate-bounce">Please Wait...</p>
+      }
       <div className="w-full mx-3 md:w-1/2 lg:w-1/4 border shadow-md rounded my-10 p-5">
         <form onSubmit={handleSubmit}>
           <input
@@ -50,6 +56,7 @@ const AddTask = () => {
             type={"submit"}
             value="Add Your Task"
             className="btn shadow w-full"
+            disabled={loading}
           />
         </form>
       </div>

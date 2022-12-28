@@ -5,6 +5,7 @@ import LayOut from "../Pages/LayOut/LayOut";
 import Login from "../Pages/LogForm/Login/Login";
 import Register from "../Pages/LogForm/Register/Register";
 import MyTask from "../Pages/MyTask/MyTask";
+import PrivateRouter from "./PrivateRouter/PrivateRouter";
 
 export const pageRouter = createBrowserRouter([
     {
@@ -13,15 +14,15 @@ export const pageRouter = createBrowserRouter([
         children:[
             {
                 path:'/',
-                element:<AddTask/>
+                element:<PrivateRouter><AddTask/></PrivateRouter>
             },
             {
                 path:'/my-task',
-                element:<MyTask/>
+                element:<PrivateRouter><MyTask/></PrivateRouter>
             },
             {
                 path:'/finished-task',
-                element:<FinishedTask/>
+                element:<PrivateRouter><FinishedTask/></PrivateRouter>
             },
             {
                 path:'/login',

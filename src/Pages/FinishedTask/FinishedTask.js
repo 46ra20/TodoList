@@ -6,11 +6,12 @@ import {
   AiOutlineCheckSquare,
 } from "react-icons/ai";
 import { handleDelete, url } from "../../Utilities/Utilities";
+import AddComment from "../AddComment/AddComment";
 
 const FinishedTask = () => {
-  const { setRefetch,finishedTask, setFinishedTask, refetch, user } =
+  const { setRefetch, finishedTask, setFinishedTask, refetch, user } =
     useContext(AuthContext);
-  
+  const [modal, setModal] = useState("");
 
   useEffect(() => {
     fetch(`${url}/get-complete-task/?email=${user.email}`)
@@ -29,10 +30,10 @@ const FinishedTask = () => {
       });
   };
 
-  const handleDeleteTask = (id) =>{
+  const handleDeleteTask = (id) => {
     handleDelete(id);
     setRefetch(!refetch);
-  }
+  };
 
   if (finishedTask < 1) {
     return (
@@ -43,6 +44,7 @@ const FinishedTask = () => {
       </div>
     );
   }
+
   return (
     <div className="flex justify-center items-center">
       <div className="w-full mx-3 md:w-1/2 lg:w-2/5 border shadow-md rounded my-10 p-5">
@@ -60,21 +62,32 @@ const FinishedTask = () => {
               </p>
               <p>{task.task}</p>
             </div>
-            <div className="flex">
+            <div className="flex items-center">
               <p className="hover:shadow-xl mr-3">
-                <button className="btn btn-sm">
-                <AiOutlineComment className="hover:shadow-xl" />
-                </button>
+                {task.comment ? (
+                  <span className="border border-sky-500 px-2 py-1 rounded">{task.comment}</span>
+                ) : (
+                  <label htmlFor="my-modal-3" className="btn btn-sm">
+                    <AiOutlineComment
+                      className="hover:shadow-xl"
+                      onClick={() => setModal(task)}
+                    />
+                  </label>
+                )}
               </p>
               <p className="hover:shadow-xl">
                 <button className="btn btn-sm">
-                <AiOutlineDelete className=" text-xl" onClick={()=>handleDeleteTask(task._id)}/>
+                  <AiOutlineDelete
+                    className=" text-xl"
+                    onClick={() => handleDeleteTask(task._id)}
+                  />
                 </button>
               </p>
             </div>
           </div>
         ))}
       </div>
+      {modal && <AddComment modal={modal} setModal={setModal} />}
     </div>
   );
 };
