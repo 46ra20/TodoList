@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../UserContext/UserContext";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { loginWithGoogle, loginWithEmail } = useContext(AuthContext);
+  const {user, loginWithGoogle, loginWithEmail } = useContext(AuthContext);
   const [error, setError] = useState("");
   
   //navigate user after login
@@ -34,7 +34,10 @@ const Login = () => {
       })
       .catch((err) => setError(err));
   };
-
+  
+  if(user?.uid){
+    return <Navigate to={from} replace={true} />
+  }
   return (
     <div className="flex justify-center items-center">
       <div className="w-full mx-3 md:w-1/2 lg:w-1/4 border shadow-lg rounded my-10 p-5">

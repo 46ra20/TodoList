@@ -61,12 +61,17 @@ const FinishedTask = () => {
                   title="Make inComplete"
                 />
               </p>
+              {task.imgUrl && (
+                <img src={task.imgUrl} className="h-12 w-8 rounded mr-2" alt="" />
+              )}
               <p>{task.task}</p>
             </div>
             <div className="flex items-center">
               <p className="hover:shadow-xl mr-3">
                 {task.comment ? (
-                  <span className="border border-sky-500 px-2 py-1 rounded">{task.comment}</span>
+                  <span className="border border-sky-500 px-2 py-1 rounded">
+                    {task.comment}
+                  </span>
                 ) : (
                   <label htmlFor="my-modal-3" className="btn btn-sm">
                     <AiOutlineComment
