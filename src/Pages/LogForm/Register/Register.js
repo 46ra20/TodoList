@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../UserContext/UserContext';
 
 
 const Register = () => {
     const {singUp} = useContext(AuthContext);
     const [error, setError] = useState('')
+    const navigate = useNavigate()
+
     const handleSubmit = (event) =>{
         event.preventDefault();
         const form = event.target;
@@ -13,7 +16,8 @@ const Register = () => {
     
         singUp(email, password)
         .then((result)=>{
-            if(result?.user?.uid){
+            if(result?.user){
+                navigate('/')
                 form.reset()
             }
         })

@@ -43,7 +43,7 @@ const AddComment = ({modal,setModal}) => {
             }
           </p>
           <form onSubmit={handleSubmit}>
-            <input type={'text'} name='comment' className='w-full input input-md shadow ' placeholder="Your Comment About This Task"/>
+            <input type={'text'} name='comment' className='w-full input input-md shadow ' placeholder="Your Comment About This Task" required/>
             <p className="text-right"><input type={'submit'} value="Add Comment" className="btn mt-5"/></p>
           </form>
         </div>

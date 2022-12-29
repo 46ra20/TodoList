@@ -58,6 +58,7 @@ const FinishedTask = () => {
                 <AiOutlineCheckSquare
                   className="text-blue-600"
                   onClick={() => handleIncomplete(task._id)}
+                  title="Make inComplete"
                 />
               </p>
               <p>{task.task}</p>
@@ -71,6 +72,7 @@ const FinishedTask = () => {
                     <AiOutlineComment
                       className="hover:shadow-xl"
                       onClick={() => setModal(task)}
+                      title="Add Comment"
                     />
                   </label>
                 )}
@@ -80,6 +82,7 @@ const FinishedTask = () => {
                   <AiOutlineDelete
                     className=" text-xl"
                     onClick={() => handleDeleteTask(task._id)}
+                    title="Delete Your Task"
                   />
                 </button>
               </p>

@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 //url
-const url = "http://localhost:5000";
+const url = "https://todo-list-server-46ra20.vercel.app"||"http://localhost:5000";
 
 //add task
 const addTask = (task) => {

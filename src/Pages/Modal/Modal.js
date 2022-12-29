@@ -47,6 +47,7 @@ const Modal = ({ modal, setModal }) => {
                 name="update_task"
                 defaultValue={modal.task}
                 onChange={(e) => setTask(e.target.value)}
+                required
               ></input>
               <p className="text-right">
                 <input

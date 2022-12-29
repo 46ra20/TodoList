@@ -48,17 +48,17 @@ const MyTask = () => {
         {getTask?.map((task) => (
           <div key={task._id} className=' border-b-2 border-indigo-500 py-2 flex justify-between'>
             <div className="flex items-center">
-                <p className="pr-2"><input type={'checkbox'} onClick={()=>handleComplete(task._id)} /></p>
+                <p className="pr-2"><input title="Make Your Task Complete" type={'checkbox'} onClick={()=>handleComplete(task._id)} /></p>
                 <p>{task.task}</p>
             </div>
             <div className="flex">
                 <p className="mr-3 hover:shadow-xl">
                   {/* <button className="btn btn-sm"><AiFillEdit className="text-xl "/></button> */}
-                  <label htmlFor="todo-list" className="btn btn-sm" onClick={()=>setModal(task)}><AiFillEdit className="text-xl "/></label>
+                  <label htmlFor="todo-list" className="btn btn-sm" onClick={()=>setModal(task)}><AiFillEdit title="Update Your Task" className="text-xl "/></label>
                 </p>
                 <p className="hover:shadow-xl">
                   <button className="btn btn-sm">
-                  <AiOutlineDelete onClick={()=>{handleDeleteTask(task._id)}} className="text-xl"/>
+                  <AiOutlineDelete title="Delete Your Task" onClick={()=>{handleDeleteTask(task._id)}} className="text-xl"/>
                   </button>
                 </p>
             </div>
