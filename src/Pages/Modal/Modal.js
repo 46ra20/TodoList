@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../UserContext/UserContext";
 import { url } from "../../Utilities/Utilities";
+import { toast } from "react-hot-toast";
 
 const Modal = ({ modal, setModal }) => {
   const { setRefetch, refetch } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const Modal = ({ modal, setModal }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast.success("Your Task Update Successfully.")
         setRefetch(!refetch);
         console.log(data);
       });

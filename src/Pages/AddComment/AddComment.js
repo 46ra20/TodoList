@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { AuthContext } from "../../UserContext/UserContext";
 import { url } from "../../Utilities/Utilities";
 
@@ -19,6 +20,7 @@ const AddComment = ({modal,setModal}) => {
         .then(data=>{
             setModal('')
             console.log(data)
+            toast.success('Your Comment Successfully Added.')
             setRefetch(!refetch)
         }
         )

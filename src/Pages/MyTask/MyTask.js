@@ -3,6 +3,8 @@ import { AuthContext } from "../../UserContext/UserContext";
 import { handleDelete, url } from "../../Utilities/Utilities";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import Modal from "../Modal/Modal";
+import { toast } from "react-hot-toast";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const MyTask = () => {
   const { user, getTask, setGetTask, setRefetch, refetch } =
@@ -15,7 +17,7 @@ const MyTask = () => {
       .then((data) => {
         setGetTask(data);
       });
-  }, [setGetTask, refetch,user.email]);
+  }, [setGetTask, refetch, user.email]);
 
   const handleComplete = (id) => {
     fetch(`${url}/complete-task/?id=${id}`, {
@@ -23,6 +25,7 @@ const MyTask = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast.success("Your task add finished task route.");
         setRefetch(!refetch);
       });
   };
@@ -58,9 +61,17 @@ const MyTask = () => {
                   onClick={() => handleComplete(task._id)}
                 />
               </p>
-              
+
               {task.imgUrl && (
-                <img src={task.imgUrl} className="h-8 w-6 rounded mr-2" alt="" />
+                // <PhotoProvider>
+                //   <PhotoView src={task.imgUrl}>
+                    <img
+                      src={task.imgUrl}
+                      className="h-8 w-6 rounded mr-2"
+                      alt=""
+                    />
+                //   </PhotoView>
+                // </PhotoProvider>
               )}
               <p>{task.task}</p>
             </div>

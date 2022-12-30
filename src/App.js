@@ -1,19 +1,17 @@
 import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { pageRouter } from "./Router/Router";
-import { ToastContainer } from "react-toastify";
-import { Tooltip } from "react-tooltip";
-import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "./UserContext/UserContext";
+import "react-photo-view/dist/react-photo-view.css";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-  const {theme} = useContext(AuthContext)
+  const { theme } = useContext(AuthContext);
   return (
-    <div  data-theme={`${theme?'garden':'dark'}`} className="min-h-screen">
+    <div data-theme={`${theme ? "garden" : "dark"}`} className="min-h-screen">
       <RouterProvider router={pageRouter}>
-        <ToastContainer />
-        <Tooltip />
+        <Toaster />
       </RouterProvider>
     </div>
   );

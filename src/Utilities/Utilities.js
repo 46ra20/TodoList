@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 //url
 const url = "https://todo-list-server-46ra20.vercel.app"||"http://localhost:5000";
@@ -16,7 +16,7 @@ const addTask = (task) => {
     .then((data) => {
       console.log(data);
       if (data.acknowledged) {
-        toast.success("Your Task Added Successfully.");
+       toast.success('Task Added Successfully.')
       }
     });
 };
@@ -26,7 +26,11 @@ const handleDelete = (id) => {
     method: "Delete",
   })
   .then(res=>res.json())
-  .then(data=>console.log(data))
+  .then(data=>{
+    if(data.deleteCount>0){
+      toast.success('Task Deleted Successfully.')
+    }
+  })
 };
 
 export { addTask, url, handleDelete };

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../UserContext/UserContext";
+import { toast } from "react-hot-toast";
 import {
   AiOutlineComment,
   AiOutlineDelete,
@@ -7,6 +8,8 @@ import {
 } from "react-icons/ai";
 import { handleDelete, url } from "../../Utilities/Utilities";
 import AddComment from "../AddComment/AddComment";
+
+import { PhotoProvider, PhotoView } from "react-photo-view";
 
 const FinishedTask = () => {
   const { setRefetch, finishedTask, setFinishedTask, refetch, user } =
@@ -17,7 +20,7 @@ const FinishedTask = () => {
     fetch(`${url}/get-complete-task/?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setFinishedTask(data));
-  }, [refetch]);
+  }, [refetch,user.email]);
 
   const handleIncomplete = (id) => {
     fetch(`${url}/make-incomplete/?id=${id}`, {
@@ -25,6 +28,7 @@ const FinishedTask = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast.success("Your Task in incomplete route");
         setRefetch(!refetch);
         console.log(data);
       });
@@ -62,7 +66,15 @@ const FinishedTask = () => {
                 />
               </p>
               {task.imgUrl && (
-                <img src={task.imgUrl} className="h-12 w-8 rounded mr-2" alt="" />
+                // <PhotoProvider>
+                //   <PhotoView src={task.imgUrl}>
+                    <img
+                      src={task.imgUrl}
+                      className="h-8 w-6 rounded mr-2"
+                      alt=""
+                    />
+                //   </PhotoView>
+                // </PhotoProvider>
               )}
               <p>{task.task}</p>
             </div>
